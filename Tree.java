@@ -69,35 +69,35 @@ public class Tree {
         if (current == null)   //если дерево пусто
             return false;
         else {
-            if (current.leftChild != null && current.leftChild.data > data)
+            if (current.leftChild != null && current.leftChild.data > data)  //если значение меньше, идем налево
                 remove(current.leftChild, data);
-            if (current.rightChild != null && current.rightChild.data < data)
+            if (current.rightChild != null && current.rightChild.data < data) //если значение больше, идем направо
                 remove(current.rightChild, data);
 
             if (current.data == data)        //если удаляется корень
             {
-                if (current.leftChild == null && current.rightChild == null) {
+                if (current.leftChild == null && current.rightChild == null) {  //если потомков нет
                     current = null;
                 } else {
-                    if (current.leftChild != null && current.rightChild == null) {
+                    if (current.leftChild != null && current.rightChild == null) {  //если есть только левый потомок
                         current.data = current.leftChild.data;
-                        current.leftChild = current.leftChild.leftChild;
+                        current.leftChild = current.leftChild.leftChild;  //подтянули левое поддерево
 
                     } else {
-                        if (current.rightChild != null && current.leftChild == null) {
+                        if (current.rightChild != null && current.leftChild == null) {  //если есть только правый потомок
                             current.data = current.rightChild.data;
-                            current.rightChild = current.rightChild.rightChild;
+                            current.rightChild = current.rightChild.rightChild;  //подтянули правое поддерево
 
                         } else {
-                            if (current.rightChild != null && current.leftChild != null) {
+                            if (current.rightChild != null && current.leftChild != null) {  //если есть оба потомка
 
-                                if (current.rightChild.leftChild == null) {
+                                if (current.rightChild.leftChild == null) {     //если у правого потомка нет левого потомка
                                     current.data = current.rightChild.data;
                                     current.rightChild = current.rightChild.rightChild;
                                 } else {
-                                    if (current.rightChild.leftChild != null) {
+                                    if (current.rightChild.leftChild != null) {   //если у правого потомка есть левый потомок
                                         Node l = current.rightChild.leftChild;
-                                        while (l.leftChild != null)
+                                        while (l.leftChild != null)  //до крайнего левого
                                             l = l.leftChild;
                                         current.data = l.data;
                                         remove(current.rightChild, l.data);
@@ -117,17 +117,17 @@ public class Tree {
                     left = null;
                     current.leftChild = null;
                 } else {
-                    if (left.leftChild == null && left.rightChild != null) {
+                    if (left.leftChild == null && left.rightChild != null) {   //если есть только правый потомок
                         left.data = left.rightChild.data;
                         current.leftChild = left.rightChild;
 
                     } else {
-                        if (left.rightChild == null && left.leftChild != null) {
+                        if (left.rightChild == null && left.leftChild != null) {   //если есть только левый потомок
                             left.data = left.leftChild.data;
                             current.leftChild = left.leftChild;
                         } else {
-                            if (left.leftChild != null && left.rightChild != null) {
-                                if (left.rightChild.leftChild == null) //если нет самого крайнего левого в правом поддереве
+                            if (left.leftChild != null && left.rightChild != null) {  //два потомка
+                                if (left.rightChild.leftChild == null) //если у правого нет левого потомка
                                 {
                                     left.data = left.rightChild.data;
                                     left.rightChild = left.rightChild.rightChild;  //подтягиваем указатель на правое поддерево правого узла
@@ -147,7 +147,7 @@ public class Tree {
                 }
             } else {
 
-                if (current.rightChild != null && current.rightChild.data == data) {
+                if (current.rightChild != null && current.rightChild.data == data) {  //если есть правый
                     Node right = current.rightChild;
 
                     if (right.leftChild == null && right.rightChild == null) //если удаляем лист: без потомков
