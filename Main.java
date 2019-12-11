@@ -6,8 +6,10 @@ public class Main {
 
         for(int i=0; i<arr.length; i++)
             t.add(arr[i]);
+        t.print(0);
         t.delete(2);
-        t.printTree(t.getRoot(), 0);
+        System.out.println();
+        t.print(0);
 
     }
 }
