@@ -1,14 +1,16 @@
-public class Node {
+import java.lang.Comparable;
+
+public class Node<T extends Comparable<T>> {
 
    // public int key; //ключ узла
-    public int data; //некоторые данные в узле
-    public Node leftChild; //левый потомок
-    public Node rightChild; //правый потомок
+    public T data; //некоторые данные в узле
+    public Node<T> leftChild; //левый потомок
+    public Node<T> rightChild; //правый потомок
 
 
 
 
-    Node(int d)
+    Node(T d)
     {
         data = d;
         leftChild = null;

@@ -1,8 +1,10 @@
-public class Tree {
+import java.lang.Comparable;
 
-    private Node root;  //корень дерева
+public class Tree<T extends Comparable<T>>{
 
-    Node findElem(int d)   //поиск элемента по ключу
+    private Node<T> root;  //корень дерева
+
+    Node findElem(T d)   //поиск элемента по ключу
     {
         Node current = root;
 
@@ -10,7 +12,7 @@ public class Tree {
             return null;
 
         while (current.data != d) {
-            if (current.data > d) {
+            if (current.data.compareTo((d)) > 0) {   //current.data > d
                 current = current.leftChild;
             } else current = current.rightChild;
 
@@ -25,14 +27,14 @@ public class Tree {
     }
 
 
-    int compareTo(Node n) {
-        if (root.data > n.data)
+   /* T compareTo(Node n) {
+        if (root.data.compareTo(n.data) > 0)    //root.data > n.data
             return 1;
         else if (root.data < n.data) return -1;
         return 0;
-    }
+    }*/
 
-    void add(int data) {
+    void add(T data) {
         Node node = new Node(data);  //создание новой вершины
         if (root == null)
             root = node;
@@ -41,10 +43,10 @@ public class Tree {
     }
 
 
-    void addTo(int data, Node node) {
+    void addTo(T data, Node<T> node) {
         Node current = node;
 
-        if (current.data > data)     //если вставляемое значение меньше значения в узле
+        if (current.data.compareTo(data) > 0)     //если вставляемое значение меньше значения в узле   current.data > data
         {
             if (current.leftChild == null)
                 current.leftChild = new Node(data);  //создаем новую вершину
@@ -58,20 +60,20 @@ public class Tree {
 
 
     }
-    void delete(int data)
+    void delete(T data)
     {
         remove(root,data);
     }
 
-    boolean remove(Node node, int data) {
-        Node current = node;
+    boolean remove(Node<T> node, T data) {
+        Node<T> current = node;
 
         if (current == null)   //если дерево пусто
             return false;
         else {
-            if (current.leftChild != null && current.leftChild.data > data)  //если значение меньше, идем налево
+            if (current.leftChild != null && current.leftChild.data.compareTo(data) > 0)  //если значение меньше, идем налево   current.leftChild.data > data
                 remove(current.leftChild, data);
-            if (current.rightChild != null && current.rightChild.data < data) //если значение больше, идем направо
+            if (current.rightChild != null && current.rightChild.data.compareTo(data) < 0) //если значение больше, идем направо    current.rightChild.data < data
                 remove(current.rightChild, data);
 
             if (current.data == data)        //если удаляется корень
@@ -100,7 +102,7 @@ public class Tree {
                                         while (l.leftChild != null)  //до крайнего левого
                                             l = l.leftChild;
                                         current.data = l.data;
-                                        remove(current.rightChild, l.data);
+                                        remove(current.rightChild,l.data);
 
                                     }
                                 }
@@ -190,7 +192,7 @@ public class Tree {
         return true;
     }
 
-    Node findMin(Node root) {
+    Node findMin(Node<T> root) {
         if (root.leftChild != null) {
             return findMin(root.leftChild);
         } else {
@@ -198,7 +200,7 @@ public class Tree {
         }
     }
 
-    void printTree(Node tree, int level)
+    void printTree(Node<T> tree, int level)
     {
         if(tree != null)
         {
